@@ -41,7 +41,17 @@ function updateActiveClock() {
     const h = time.getHours() % 12;
     const m = time.getMinutes();
 
-    document.getElementById(`${h}h-${m}m`).classList.add('active');
+    const activeElement = document.getElementById(`${h}h-${m}m`)
+    activeElement.classList.add('active');
+
+    const elementRect = activeElement.getBoundingClientRect();
+    const absoluteElementTop = elementRect.top + window.pageYOffset;
+    const middle = absoluteElementTop - (window.innerHeight / 2);
+    window.scrollTo({
+        top: middle,
+        left: 0,
+        behavior: 'smooth'
+    });
 
     //Update every 500ms
     let t = setTimeout(updateActiveClock, 500);
