@@ -74,3 +74,7 @@ body {
 
     background-color: #BBB;
 }
+
+.active.clock-wrapper .clock {
+    background-color: #00FFFF;
+}

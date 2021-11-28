@@ -4,12 +4,17 @@ clock.remove();
 //Get container element from DOM
 const clockContainer = document.querySelector('.clocks-container');
 
-//For each minute of each hour
-for(let i = 0; i < 12; i++) {
-    for(let j = 0; j < 60; j++) {
-        //Create a clock displaying time in hours (i) and minutes (j)
-        createClock(i, j);
+function init() {
+    //For each minute of each hour
+    for(let i = 0; i < 12; i++) {
+        for(let j = 0; j < 60; j++) {
+            //Create a clock displaying time in hours (i) and minutes (j)
+            createClock(i, j);
+        }
     }
+
+    //Set initial active clock
+    updateActiveClock();
 }
 
 function createClock(h, m) {
@@ -24,7 +29,22 @@ function createClock(h, m) {
     clockContainer.appendChild(clockClone);
 }
 
-//TODO: Assign ID to each clock (e.g. id="3h-42m" for 03:42)
-    //TODO: Then use JS to set that element to "active" when it matches the current time
-        //TODO: Remove "active" from any other element (use query selector to get ".active") beforehand
+function updateActiveClock() {
+    //Remove active state from current clock(s)
+    const activeElements = document.querySelectorAll('.active');
+    activeElements.forEach(element => {
+        element.classList.remove('active');
+    });
+
+    //TODO: Set clock with ID matching current time to active
+    const time = new Date();
+    const h = time.getHours() % 12;
+    const m = time.getMinutes();
+
+    document.getElementById(`${h}h-${m}m`).classList.add('active');
+
+    //Update every 500ms
+    let t = setTimeout(updateActiveClock, 500);
+}
+
 //TODO: Shuffle clocks to be in random order
