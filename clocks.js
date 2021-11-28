@@ -13,10 +13,14 @@ for(let i = 0; i < 12; i++) {
 }
 
 function createClock(h, m) {
+    //Clone standard clock markup
     const clockClone = clock.cloneNode(true);
     //Set hand rotations based on time parameters
     clockClone.querySelector('.hour').style.transform = `rotate(${(h*30) + (m/2)}deg)`;
     clockClone.querySelector('.minute').style.transform = `rotate(${m*6}deg)`;
+    //Set clock element ID
+    clockClone.id = `${h}h-${m}m`;
+    //Append clock to DOM
     clockContainer.appendChild(clockClone);
 }
 
