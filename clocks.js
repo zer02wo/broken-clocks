@@ -12,6 +12,9 @@ function init() {
             createClock(i, j);
         }
     }
+    
+    //Shuffle clock elements to random order
+    shuffleClocks();
 
     //Set initial active clock
     updateActiveClock();
@@ -27,6 +30,22 @@ function createClock(h, m) {
     clockClone.id = `${h}h-${m}m`;
     //Append clock to DOM
     clockContainer.appendChild(clockClone);
+}
+
+function shuffleClocks() {
+    //Get all clock elements
+    const clocks = Array.from(clockContainer.children);
+    arrayShuffle(clocks);
+    for(const clock of clocks) {
+        clockContainer.appendChild(clock);
+    }
+}
+
+function arrayShuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
 }
 
 function updateActiveClock() {
@@ -47,4 +66,4 @@ function updateActiveClock() {
     let t = setTimeout(updateActiveClock, 500);
 }
 
-//TODO: Shuffle clocks to be in random order
+//TODO: Add lightmode/darkmode toggle on window click
