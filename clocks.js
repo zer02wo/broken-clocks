@@ -12,9 +12,6 @@ function init() {
             createClock(i, j);
         }
     }
-    
-    //Shuffle clock elements to random order
-    shuffleClocks();
 
     //Set initial active clock
     updateActiveClock();
@@ -32,10 +29,46 @@ function createClock(h, m) {
     clockContainer.appendChild(clockClone);
 }
 
+function updateActiveClock() {
+    //Remove active state from current clock(s)
+    const activeElements = document.querySelectorAll('.active');
+    activeElements.forEach(element => {
+        element.classList.remove('active');
+    });
+
+    //Set clock with ID matching current time to active
+    const time = new Date();
+    const h = time.getHours() % 12;
+    const m = time.getMinutes();
+
+    document.getElementById(`${h}h-${m}m`).classList.add('active');
+
+    //Update every 500ms
+    let t = setTimeout(updateActiveClock, 500);
+}
+
+function toggleClockOrder() {
+    if(clockContainer.classList.contains('shuffled')) {
+        //Update container element state
+        clockContainer.classList.remove('shuffled');
+        clockContainer.classList.add('ordered');
+        //Shift clock elements to chronological order
+        orderClocks();
+    } else {
+        //Update container element state
+        clockContainer.classList.remove('ordered');
+        clockContainer.classList.add('shuffled');
+        //Shuffle clock elements to random order
+        shuffleClocks();
+    }
+}
+
 function shuffleClocks() {
     //Get all clock elements
     const clocks = Array.from(clockContainer.children);
+    //Shuffle array of clocks
     arrayShuffle(clocks);
+    //Append clocks to DOM in shuffled order
     for(const clock of clocks) {
         clockContainer.appendChild(clock);
     }
@@ -48,22 +81,39 @@ function arrayShuffle(array) {
     }
 }
 
-function updateActiveClock() {
-    //Remove active state from current clock(s)
-    const activeElements = document.querySelectorAll('.active');
-    activeElements.forEach(element => {
-        element.classList.remove('active');
-    });
-
-    //TODO: Set clock with ID matching current time to active
-    const time = new Date();
-    const h = time.getHours() % 12;
-    const m = time.getMinutes();
-
-    document.getElementById(`${h}h-${m}m`).classList.add('active');
-
-    //Update every 500ms
-    let t = setTimeout(updateActiveClock, 500);
+function orderClocks() {
+    //Get all clock elements
+    const clocks = Array.from(clockContainer.children);
+    //Order clocks chronologically
+    chronologicalSort(clocks);
+    //Append clocks to DOM in sequential order
+    for(const clock of clocks) {
+        clockContainer.appendChild(clock);
+    }
 }
+
+function chronologicalSort(array) {
+    array.sort((a,b) => {
+        let timeStampA = getTimeStampFromID(a.id);
+        let timeStampB = getTimeStampFromID(b.id);
+
+        return timeStampA - timeStampB;
+    });
+}
+
+function getTimeStampFromID(id) {
+    //Remove alphabetic characters from ID
+    let str = id.replace(/h|m/g, '');
+    //Destructure assignment on either side of hyphen
+    let [h, m] = str.split('-');
+    //Calculate timestamp as seconds
+    return (h*3600) + (m*60);
+}
+
+document.addEventListener('keypress', e => {
+    if(e.key === ' ') {
+        toggleClockOrder();
+    }
+});
 
 //TODO: Add lightmode/darkmode toggle on window click
