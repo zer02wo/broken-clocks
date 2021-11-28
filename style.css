@@ -1,0 +1,76 @@
+/*Normalise CSS across browsers*/
+*{margin: 0; padding: 0; border: 0; outline: 0;}
+
+body {
+    height: calc(100vh - 10px);
+
+    background: #D9D7DD;
+    padding: 5px;
+}
+
+.clocks-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    height: 100%;
+}
+
+.clock-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 0 0 2.5%;
+}
+
+.clock {
+    border-radius: 50%;
+    
+    background-color: #DDD;
+    border: solid 1px #FFF;
+}
+
+.outer-clock-face {
+    overflow: hidden;
+    position: relative;
+    width: 4.5vh;
+    height: 4.5vh;
+    border-radius: 50%;
+}
+
+.minute,
+.hour {
+    position: absolute;
+    width: 7.5%;
+    height: 30%;
+    top: -30%;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    transform-origin: bottom center;
+    
+    border-radius: 10px;
+    background-color: #000;
+}
+
+.minute {
+    position: absolute;
+    top: -45%; 
+    width: 5%;
+    height: 45%;
+}
+
+.joint {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 10%;
+    height: 10%;
+    margin: auto;
+    border-radius: 50%;
+
+    background-color: #BBB;
+}
