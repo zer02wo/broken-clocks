@@ -126,4 +126,14 @@ document.addEventListener('keypress', e => {
     }
 });
 
-//TODO: Add lightmode/darkmode toggle on window click
+function toggleThemeMode() {
+    if(document.body.classList.contains('lightmode')) {
+        //Update body element state
+        document.body.classList.remove('lightmode');
+    } else {
+        //Update body element state
+        document.body.classList.add('lightmode');
+    }
+}
+
+document.addEventListener('click', toggleThemeMode);
