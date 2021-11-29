@@ -3,8 +3,12 @@
 
 body {
     padding: 2vw 1.5vw;
-    background: #282828;
+    background-color: #282828;
     overflow: hidden;
+}
+
+body.lightmode {
+    background-color: #ECF0F3;
 }
 
 .clocks-container {
@@ -26,10 +30,17 @@ body {
 .clock {
     border: solid 1px #292D32;
     border-radius: 50%;
-    transition: all 1.5s;
-    background: #282828;
+    transition: all 1s;
+    background-color: #282828;
     box-shadow: inset 5px 5px 11px #242424,
-                inset -5px -5px 11px #2c2c2c;
+                inset -5px -5px 11px #2C2C2C;
+}
+
+body.lightmode .clock {
+    border-color: #EADEFA;
+    background: #ECF0F3;
+    box-shadow: inset 13px 13px 25px #C9CCCF,
+                inset -13px -13px 25px #FFF;
 }
 
 .clock-face {
@@ -54,6 +65,10 @@ body {
     background-color: #242424;
 }
 
+body.lightmode .hand {
+    background-color: #DFE2E9;
+}
+
 .minute {
     position: absolute;
     top: -45%; 
@@ -74,6 +89,10 @@ body {
     background-color: #222;
 }
 
+body.lightmode .joint {
+    background-color: #DDE;
+}
+
 .active.clock-wrapper {
     z-index: 1;
 }
@@ -82,9 +101,17 @@ body {
     background-color: #282828;
     transform: scale(2);
     box-shadow: -5px -5px 10px rgba(67,67,67,0.5),
-    inset 2px 2px 5px rgba(0,0,0,0.5),
-    inset -2px -2px 5px rgba(67,67,67,0.5),
-    5px 5px 10px rgba(0,0,0,0.3);
+                inset 2px 2px 5px rgba(0,0,0,0.5),
+                inset -2px -2px 5px rgba(67,67,67,0.5),
+                5px 5px 10px rgba(0,0,0,0.3);
+}
+
+body.lightmode .active.clock-wrapper .clock {
+    background-color: #ECF0F3;
+    box-shadow: -5px -5px 10px rgba(67,67,67,0.4),
+                inset 2px 2px 5px #C9CCCF,
+                inset -2px -2px 5px #B0B5BF,
+                5px 5px 10px rgba(0,0,0,0.2);
 }
 
 .active.clock-wrapper .hand {
@@ -94,7 +121,13 @@ body {
 .active.clock-wrapper .joint {
     background: linear-gradient(145deg, #282828, #1C1C1C);
     box-shadow: 1px 1px 2px #222222, 
-                -1px -1px 2px #2e2e2e;
+                -1px -1px 2px #2E2E2E;
+}
+
+body.lightmode .active.clock-wrapper .joint {
+    background: linear-gradient(145deg, #FDFFFF, #D4D8DB);
+    box-shadow: 1px 1px 2px #C9CCCF, 
+                -1px -1px 2px #FFF;
 }
 
 /* Clocks at left edge */
