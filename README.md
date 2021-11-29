@@ -3,6 +3,8 @@
     A broken clock is right twice a day,
             720 broken clocks tell a different story.
 
+<img src="images/broken-clocks.jpg" alt="Broken clocks" height="400">
+
 ## Description
 
 This project is envisioned to be an artistic piece, working best on larger screens and in contemporary environments.
