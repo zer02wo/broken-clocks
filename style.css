@@ -96,3 +96,27 @@ body {
     box-shadow: 1px 1px 2px #222222, 
                 -1px -1px 2px #2e2e2e;
 }
+
+/* Clocks at left edge */
+.clocks-container .clock-wrapper.active:nth-child(15n+1) .clock {
+    position: relative;
+    left: 25%;
+}
+
+/* Clocks at right edge */
+.clocks-container .clock-wrapper.active:nth-child(15n) .clock {
+    position: relative;
+    right: 25%;
+}
+
+/* Clocks at top edge */
+.clocks-container .clock-wrapper.active:nth-child(-n+15) .clock {
+    position: relative;
+    top: 15px;
+}
+
+/* Clocks at bottom edge */
+.clocks-container .clock-wrapper.active:nth-last-child(-n+15) .clock {
+    position: relative;
+    bottom: 25px;
+}
